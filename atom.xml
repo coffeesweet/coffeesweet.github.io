@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-01T02:22:14.447Z</updated>
+  <updated>2016-09-01T02:28:38.280Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://yoursite.com/2016/08/31/spring-boot%E6%97%A5%E5%BF%97%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%8E%BB%E9%99%A4%E9%BB%98%E8%AE%A4%E7%9A%84console%E8%BE%93%E5%87%BA/"/>
     <id>http://yoursite.com/2016/08/31/spring-boot日志问题一：去除默认的console输出/</id>
     <published>2016-08-31T12:51:37.000Z</published>
-    <updated>2016-09-01T02:22:14.447Z</updated>
+    <updated>2016-09-01T02:28:38.280Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>spring boot 默认的日志是console输出，但线上一般都是file输出，所以想修改spring boot的默认输出端</p>
+    <content type="html"><![CDATA[<h2 id="日志是生产环境非常重要的配置-在迁移老的工程到spring-boot时日志的设置兼容很重要-以下是自己在配置日志的时候由于不仔细导致的一些问题备注一下"><a href="#日志是生产环境非常重要的配置-在迁移老的工程到spring-boot时日志的设置兼容很重要-以下是自己在配置日志的时候由于不仔细导致的一些问题备注一下" class="headerlink" title="日志是生产环境非常重要的配置,在迁移老的工程到spring-boot时日志的设置兼容很重要,以下是自己在配置日志的时候由于不仔细导致的一些问题备注一下"></a>日志是生产环境非常重要的配置,在迁移老的工程到spring-boot时日志的设置兼容很重要,以下是自己在配置日志的时候由于不仔细导致的一些问题备注一下</h2><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>spring boot 默认的日志是console输出，但线上一般都是file输出，所以想修改spring boot的默认输出端</p>
 <h2 id="官方文档链接"><a href="#官方文档链接" class="headerlink" title="官方文档链接"></a>官方文档链接</h2><p><a href="http://docs.spring.io/spring-boot/docs/current/reference/html/howto-logging.html" target="_blank" rel="external">http://docs.spring.io/spring-boot/docs/current/reference/html/howto-logging.html</a></p>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>按照官方文档怎么配置都关闭不掉，console和file都会输出，随后又查看了以下两篇文章</p>
 <p><a href="http://stackoverflow.com/questions/31935151/prevent-spring-boot-from-printing-logs-to-console" target="_blank" rel="external">http://stackoverflow.com/questions/31935151/prevent-spring-boot-from-printing-logs-to-console</a><br><a href="http://stackoverflow.com/questions/26019350/how-to-disable-logback-consoleappender-in-spring-boot/34852737#34852737" target="_blank" rel="external">http://stackoverflow.com/questions/26019350/how-to-disable-logback-consoleappender-in-spring-boot/34852737#34852737</a></p>
@@ -42,7 +42,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h2&gt;&lt;p&gt;spring boot 默认的日志是console输出，但线上一般都是file输出，所以想修改spring boot的默认输
+      &lt;h2 id=&quot;日志是生产环境非常重要的配置-在迁移老的工程到spring-boot时日志的设置兼容很重要-以下是自己在配置日志的时候由于不仔细导致的一些问题备注一下&quot;&gt;&lt;a href=&quot;#日志是生产环境非常重要的配置-在迁移老的工程到spring-boot时日志的设置兼容很重要
     
     </summary>
     
