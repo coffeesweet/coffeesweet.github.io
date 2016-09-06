@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.coffeesweet.me/"/>
-  <updated>2016-09-06T07:48:11.226Z</updated>
+  <updated>2016-09-06T07:51:25.467Z</updated>
   <id>http://www.coffeesweet.me/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.coffeesweet.me/2016/09/06/%E6%96%B0%E4%B8%8A%E7%BA%BFjava%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%B8%B8%E8%A7%84%E6%A3%80%E6%9F%A5%E5%B7%A5%E4%BD%9C/"/>
     <id>http://www.coffeesweet.me/2016/09/06/新上线java工程的常规检查工作/</id>
     <published>2016-09-06T07:29:25.000Z</published>
-    <updated>2016-09-06T07:48:11.226Z</updated>
+    <updated>2016-09-06T07:51:25.467Z</updated>
     
     <content type="html"><![CDATA[<p>一个新的java服务工程虽然在开发和测试阶段会进行功能，压力等各种测试，但真正上线后为了保障正常的服务，需要进行一些常规的系统和资源占用情况查看，否则可能刚上线没问题，跑一段时间出现问题。<br><a id="more"></a></p>
 <h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ol>
@@ -36,7 +36,7 @@
 <li>strace -tTFp <pid> ， 查看系统调用程序的栈信息<br>对于不是必现的后端存储访问超时排查，可以打strace的日志到文件，然后分析。</pid></li>
 </ol>
 <p><strong>注意</strong></p>
-<div class="tip"><br>strace量很大 要做grep，例如：<br><br>strace -tTp pid 2&gt;&amp;1 | grep “[sendto recvfrom]”<br>strace 默认打印到stderr，所以要重定向到stdout（2&gt;&amp;1）之后才能grep<br></div>
+<div class="tip"><br>strace量很大 要做grep，例如：    <br><br>strace -tTp pid 2&gt;&amp;1 | grep “[sendto recvfrom]”<br>strace 默认打印到stderr，所以要重定向到stdout（2&gt;&amp;1）之后才能grep<br></div>
 ]]></content>
     
     <summary type="html">
