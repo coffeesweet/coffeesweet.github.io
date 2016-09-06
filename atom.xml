@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.coffeesweet.me/"/>
-  <updated>2016-09-06T09:10:05.228Z</updated>
+  <updated>2016-09-06T09:36:55.567Z</updated>
   <id>http://www.coffeesweet.me/</id>
   
   <author>
@@ -14,6 +14,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>spring-boot多数据源问题</title>
+    <link href="http://www.coffeesweet.me/2016/09/06/spring-boot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%97%AE%E9%A2%98/"/>
+    <id>http://www.coffeesweet.me/2016/09/06/spring-boot多数据源问题/</id>
+    <published>2016-09-06T09:22:25.000Z</published>
+    <updated>2016-09-06T09:36:55.567Z</updated>
+    
+    <content type="html"><![CDATA[<p>spring-boot会有默认的datasource配置，但一个工程需要依赖多个不同的数据源的时候，配置上会出现一些问题<br><a id="more"></a></p>
+<p>先看篇文章：<br><a href="https://github.com/spring-projects/spring-boot/issues/5541" target="_blank" rel="external">https://github.com/spring-projects/spring-boot/issues/5541</a><br>大意是有个专门写spring-data-examples的哥们去官方提issues，说：spring-boot如果配置多数据源的话，必须要把相关数据源的自动配置功能给去掉，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span>(exclude = &#123; DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class,</div><div class="line">        DataSourceTransactionManagerAutoConfiguration.class, DevToolsDataSourceAutoConfiguration.class &#125;)</div></pre></td></tr></table></figure></p>
+<p>也可以这么配置<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableAutoConfiguration</span>(exclude = &#123;DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, DevToolsDataSourceAutoConfiguration.class&#125;)</div></pre></td></tr></table></figure></p>
+<p>否则在启动应用，classloader的时候会报错：No qualifying bean of type [javax.sql.DataSource] is defined: expected single matching bean but found 2，大意是spring-boot相关数据源的自动配置功能会把把多个数据源初始化的时候公用一个datasource类型，然后无法匹配最终的实例。</p>
+<p>然后相关回复是，你好好看看文档，如果是多个数据源的话，需要告诉spring-boot，哪个是缺省的数据源，就是spring-boot自动配置需要的数据源，这个用@Primary标注一下就行了，其它的数据源不用标注，这样不用配置排除数据源的自动配置选项。而且配置了@Primary后,@Transactional在没有明确qualifier的时候会默认使用@Primary数据源。</p>
+<p>然后提问题的哥们又说他知道可以加@Primary，但是关键是如果你标明了一个数据源是主（也可以理解为缺省），那么@Transactional事物可能会意外错误。因为这样框架允许开发人员在@Transactional的时候可以不指定qualifier，但多个数据源的情况下，如果都不指定名字，那么事物的数据源都变成了你指定的缺省的那个数据源了，导致本应该在其它数据源上的事物也变成主数据源的事物了。提问者任务@Transactional必须指定数据源名称，而且所有数据源应该是平等对单，不存在缺省选哪个，主食哪个的问题，应该让开发人员明确指定特定的业务用哪个数据源。<br><em>I see. The point here is that making one DataSource the primary one can be a source of errors as you could @Transactional (without an explicit qualifier) by accident and thus run transactions on the “wrong” one. In the scenario I have here, both DataSources should be treated equally and not referring to one explicitly is rather considered an error.</em></p>
+<p>具体见他们说的几个链接：<br>提问的解决方案：<br><a href="https://github.com/spring-projects/spring-data-examples/blob/master/jpa/multiple-datasources/src/main/java/example/springdata/jpa/multipleds/Application.java#L41" target="_blank" rel="external">https://github.com/spring-projects/spring-data-examples/blob/master/jpa/multiple-datasources/src/main/java/example/springdata/jpa/multipleds/Application.java#L41</a></p>
+<p>回答的解决办法：<br><a href="https://github.com/snicoll-demos/demo-multi-entity-managers" target="_blank" rel="external">https://github.com/snicoll-demos/demo-multi-entity-managers</a><br>其中还链接了一个该问题的综合讨论issus：<br><a href="https://github.com/spring-projects/spring-boot/issues/2784" target="_blank" rel="external">https://github.com/spring-projects/spring-boot/issues/2784</a></p>
+<p>最终有人贴出了问题代码，作者说在1.4.0.M2里提供修复版本，暂时只能用排除自动配置或是加@Primary的方式:<br><a href="https://github.com/spring-projects/spring-boot/issues/5104" target="_blank" rel="external">https://github.com/spring-projects/spring-boot/issues/5104</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;spring-boot会有默认的datasource配置，但一个工程需要依赖多个不同的数据源的时候，配置上会出现一些问题&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>java工程方法耗时aop实现</title>
