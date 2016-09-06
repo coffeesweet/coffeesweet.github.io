@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.coffeesweet.me/"/>
-  <updated>2016-09-06T07:55:57.608Z</updated>
+  <updated>2016-09-06T09:10:05.228Z</updated>
   <id>http://www.coffeesweet.me/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java工程方法耗时aop实现</title>
+    <link href="http://www.coffeesweet.me/2016/09/06/java%E5%B7%A5%E7%A8%8B%E6%96%B9%E6%B3%95%E8%80%97%E6%97%B6aop%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://www.coffeesweet.me/2016/09/06/java工程方法耗时aop实现/</id>
+    <published>2016-09-06T09:00:59.000Z</published>
+    <updated>2016-09-06T09:10:05.228Z</updated>
+    
+    <content type="html"><![CDATA[<p>线上确认性能问题时经常会想了解一些关键方法的执行时间，如果在每个方法里写上耗时逻辑耦合度太高，不容易维护，而aop比较容易解决这种问题<br><a id="more"></a></p>
+<h2 id="两个实现类"><a href="#两个实现类" class="headerlink" title="两个实现类"></a>两个实现类</h2><ol>
+<li><p>注解类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.zhangyue.common.annotation;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</div><div class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</div><div class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</div><div class="line"><span class="keyword">import</span> java.lang.annotation.Target;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> chenchao</div><div class="line"> * <span class="doctag">@date</span> 2016年4月21日 下午9:26:35</div><div class="line"> * <span class="doctag">@version</span> 1.0</div><div class="line"> * <span class="doctag">@throws</span></div><div class="line"> * <span class="doctag">@see</span></div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(ElementType.METHOD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> MethodMonitor &#123;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>切面类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.zhangyue.common.aspect;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Arrays;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Pointcut;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@author</span> chenchao</div><div class="line"> * <span class="doctag">@date</span> 2016年4月21日 上午10:23:05</div><div class="line"> * <span class="doctag">@version</span> 1.0</div><div class="line"> * <span class="doctag">@throws</span></div><div class="line"> * <span class="doctag">@see</span></div><div class="line"> */</div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodPerformenceAspect</span> </span>&#123;</div><div class="line"> <span class="comment">// private static final Logger logger = LoggerFactory.getLogger("monitor");</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(MethodPerformenceAspect.class);</div><div class="line"></div><div class="line">    <span class="meta">@Pointcut</span>(<span class="string">"execution(* com.zhangyue..*.*(..)) &amp;&amp; @annotation(com.zhangyue.common.annotation.MethodMonitor)"</span>)</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">pointCutMethod</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="meta">@Around</span>(<span class="string">"pointCutMethod()"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">doAround</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">        Object[] args = pjp.getArgs();</div><div class="line">        String argsStr = Arrays.toString(args);</div><div class="line">        <span class="keyword">long</span> begin = System.nanoTime();</div><div class="line">        Object o = pjp.proceed();</div><div class="line">        <span class="keyword">long</span> end = System.nanoTime();</div><div class="line">        logger.info(<span class="string">"&#123;&#125;.&#123;&#125;&#123;&#125;:&#123;&#125;ms"</span>, pjp.getTarget().getClass(), pjp.getSignature().getName(),</div><div class="line">               argsStr, (end - begin) / <span class="number">1000000</span>);</div><div class="line">        <span class="keyword">return</span> o;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>注意</strong></p>
+<div class="tip"><br>如果想把这个功能实现在独立的jar提供给其它的spring工程使用，需要确认MethodPerformenceAspect类在其它工程启动的时候被load和实例化了。可以在其它spring工程里@Import({MethodPerformenceAspect.class})，或者如果其它工程的包名和你这个工具jar所在的包名有一样的父包，比如两个jar的root package都是com.zhangyue,可以用类似@ComponentScan(basePackages={“com.zhangyue”})<br></div>
+
+<p>反正就是要保证被其它工程正确给实例化了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;线上确认性能问题时经常会想了解一些关键方法的执行时间，如果在每个方法里写上耗时逻辑耦合度太高，不容易维护，而aop比较容易解决这种问题&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>新上线java工程的常规检查工作</title>
