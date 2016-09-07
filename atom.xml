@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.coffeesweet.me/"/>
-  <updated>2016-09-07T03:51:04.748Z</updated>
+  <updated>2016-09-07T03:54:19.713Z</updated>
   <id>http://www.coffeesweet.me/</id>
   
   <author>
@@ -20,10 +20,12 @@
     <link href="http://www.coffeesweet.me/2016/09/07/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99%E6%95%B4%E7%90%86/"/>
     <id>http://www.coffeesweet.me/2016/09/07/技术学习网站整理/</id>
     <published>2016-09-07T03:38:39.000Z</published>
-    <updated>2016-09-07T03:51:04.748Z</updated>
+    <updated>2016-09-07T03:54:19.713Z</updated>
     
     <content type="html"><![CDATA[<p>一些常用的技术学习网站<br><a id="more"></a></p>
-<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2>]]></content>
+<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>javacodegeeks:  <a href="https://www.javacodegeeks.com" target="_blank" rel="external">https://www.javacodegeeks.com</a></p>
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><p>Full Stack Python:  <a href="https://www.fullstackpython.com" target="_blank" rel="external">https://www.fullstackpython.com</a></p>
+]]></content>
     
     <summary type="html">
     
