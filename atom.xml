@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.coffeesweet.me/"/>
-  <updated>2016-09-06T09:36:55.567Z</updated>
+  <updated>2016-09-07T03:41:30.846Z</updated>
   <id>http://www.coffeesweet.me/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>技术学习网站整理</title>
+    <link href="http://www.coffeesweet.me/2016/09/07/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99%E6%95%B4%E7%90%86/"/>
+    <id>http://www.coffeesweet.me/2016/09/07/技术学习网站整理/</id>
+    <published>2016-09-07T03:38:39.000Z</published>
+    <updated>2016-09-07T03:41:30.846Z</updated>
+    
+    <content type="html"><![CDATA[<p>一些常用的技术学习网站<br><a id="more"></a></p>
+<h2 id="java"><a href="#java" class="headerlink" title="java"></a>java</h2><p>[javacodegeeks] <a href="https://www.javacodegeeks.com" target="_blank" rel="external">https://www.javacodegeeks.com</a></p>
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><p>[Full Stack Python] <a href="https://www.fullstackpython.com" target="_blank" rel="external">https://www.fullstackpython.com</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一些常用的技术学习网站&lt;br&gt;
+    
+    </summary>
+    
+      <category term="study" scheme="http://www.coffeesweet.me/categories/study/"/>
+    
+    
+      <category term="study, java, python" scheme="http://www.coffeesweet.me/tags/study-java-python/"/>
+    
+  </entry>
   
   <entry>
     <title>spring-boot多数据源问题</title>
